@@ -5,40 +5,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
+
+    //add support for JDBC, NO HARDCODED USER
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails john = User.builder()
-                .username("john")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
-        UserDetails mary = User.builder()
-                .username("mary")
-                .password("{noop}test123")
-                .roles("EMPLOYEE","MANAGER")
-                .build();
-        UserDetails SUZAN = User.builder()
-                .username("suzan")
-                .password("{noop}test123")
-                .roles("EMPLOYEE","MANAGER","ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(john, mary, SUZAN);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                 configurer
                         .requestMatchers(HttpMethod.GET,"/api/employees").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET,"/api/employees/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST,"/api/employees").hasRole("HAMAGER")
+                        .requestMatchers(HttpMethod.POST,"/api/employees").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT,"/api/employees").hasRole("MANAGER")
+//                        .requestMatchers(HttpMethod.PUT,"/api/employees").hasRole("MANAGER") //if we are using SPRING DATA REST
                         .requestMatchers(HttpMethod.DELETE,"/api/employees/**").hasRole("ADMIN")
 
         );
@@ -51,6 +41,24 @@ public class DemoSecurityConfig {
         return http.build();
 
 
-
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsManager() {
+//        UserDetails john = User.builder()
+//                .username("john")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE")
+//                .build();
+//        UserDetails mary = User.builder()
+//                .username("mary")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE","MANAGER")
+//                .build();
+//        UserDetails SUZAN = User.builder()
+//                .username("suzan")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE","MANAGER","ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(john, mary, SUZAN);
+//    }
     }
 }
