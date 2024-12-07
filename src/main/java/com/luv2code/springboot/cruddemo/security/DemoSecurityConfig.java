@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
-
     //add support for JDBC, NO HARDCODED USER
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
