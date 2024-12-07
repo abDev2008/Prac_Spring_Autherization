@@ -40,6 +40,7 @@ public class DemoSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/employees").hasRole("HAMAGER")
                         .requestMatchers(HttpMethod.PUT,"/api/employees").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.DELETE,"/api/employees/**").hasRole("ADMIN")
+
         );
         // TELL SPRING we are using HTTP basic configuration
         http.httpBasic(Customizer.withDefaults());
