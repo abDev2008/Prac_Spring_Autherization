@@ -16,7 +16,17 @@ public class DemoSecurityConfig {
     //add support for JDBC, NO HARDCODED USER
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailmanager = new JdbcUserDetailsManager(dataSource);
+
+        //define query to retrieve a user by username
+        jdbcUserDetailmanager.setUsersByUsernameQuery("select user_id, pw, active from members where user_id=?");
+        //define query to retrieve the authorities/roles by username
+//        jdbcUserDetailmanager.setUsersByUsernameQuery(
+//                "select user_id, role from roles where user_id=?"
+//        );
+        jdbcUserDetailmanager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user_id=?");
+
+        return  jdbcUserDetailmanager;
     }
 
     @Bean

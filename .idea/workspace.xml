@@ -7,6 +7,7 @@
     <list default="true" id="e98dcd05-45b4-4354-8622-109ac936e72a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luv2code/springboot/cruddemo/security/DemoSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luv2code/springboot/cruddemo/security/DemoSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/luv2code/springboot/cruddemo/security/DemoSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luv2code/springboot/cruddemo/security/DemoSecurityConfig.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +84,7 @@
       <updated>1733209799824</updated>
       <workItem from="1733209801293" duration="11617000" />
       <workItem from="1733596898569" duration="1651000" />
-      <workItem from="1733607789768" duration="3225000" />
+      <workItem from="1733607789768" duration="6896000" />
     </task>
     <servers />
   </component>
